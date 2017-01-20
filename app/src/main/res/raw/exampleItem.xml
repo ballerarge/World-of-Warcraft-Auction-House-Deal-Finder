@@ -1,0 +1,104 @@
+<wowhead>
+    <item id="25225">
+        <name>
+            <![CDATA[ Deepforge Broadaxe ]]>
+        </name>
+        <level>120</level>
+        <quality id="2">Uncommon</quality>
+        <class id="2">
+            <![CDATA[ Weapons ]]>
+        </class>
+        <subclass id="1">
+            <![CDATA[ Two-Handed Axes ]]>
+        </subclass>
+        <icon displayId="8534">inv_axe_02</icon>
+        <inventorySlot id="17">Two-Hand</inventorySlot>
+        <randomEnchantments>
+            <randomEnchantment id="5">
+                <![CDATA[ of the Monkey ]]>
+            </randomEnchantment>
+            <randomEnchantment id="6">
+                <![CDATA[ of the Eagle ]]>
+            </randomEnchantment>
+            <randomEnchantment id="7">
+                <![CDATA[ of the Bear ]]>
+            </randomEnchantment>
+            <randomEnchantment id="8">
+                <![CDATA[ of the Whale ]]>
+            </randomEnchantment>
+            <randomEnchantment id="9">
+                <![CDATA[ of the Owl ]]>
+            </randomEnchantment>
+            <randomEnchantment id="10">
+                <![CDATA[ of the Gorilla ]]>
+            </randomEnchantment>
+            <randomEnchantment id="11">
+                <![CDATA[ of the Falcon ]]>
+            </randomEnchantment>
+            <randomEnchantment id="12">
+                <![CDATA[ of the Boar ]]>
+            </randomEnchantment>
+            <randomEnchantment id="13">
+                <![CDATA[ of the Wolf ]]>
+            </randomEnchantment>
+            <randomEnchantment id="14">
+                <![CDATA[ of the Tiger ]]>
+            </randomEnchantment>
+            <randomEnchantment id="15">
+                <![CDATA[ of Spirit ]]>
+            </randomEnchantment>
+            <randomEnchantment id="16">
+                <![CDATA[ of Stamina ]]>
+            </randomEnchantment>
+            <randomEnchantment id="17">
+                <![CDATA[ of Strength ]]>
+            </randomEnchantment>
+            <randomEnchantment id="18">
+                <![CDATA[ of Agility ]]>
+            </randomEnchantment>
+            <randomEnchantment id="19">
+                <![CDATA[ of Intellect ]]>
+            </randomEnchantment>
+            <randomEnchantment id="20">
+                <![CDATA[ of Power ]]>
+            </randomEnchantment>
+            <randomEnchantment id="36">
+                <![CDATA[ of the Sorcerer ]]>
+            </randomEnchantment>
+            <randomEnchantment id="39">
+                <![CDATA[ of the Invoker ]]>
+            </randomEnchantment>
+            <randomEnchantment id="40">
+                <![CDATA[ of the Bandit ]]>
+            </randomEnchantment>
+            <randomEnchantment id="41">
+                <![CDATA[ of the Beast ]]>
+            </randomEnchantment>
+            <randomEnchantment id="43">
+                <![CDATA[ of the Soldier ]]>
+            </randomEnchantment>
+            <randomEnchantment id="44">
+                <![CDATA[ of the Elder ]]>
+            </randomEnchantment>
+            <randomEnchantment id="45">
+                <![CDATA[ of the Champion ]]>
+            </randomEnchantment>
+        </randomEnchantments>
+        <htmlTooltip>
+            <![CDATA[
+<table><tr><td><!--nstart--><b class="q2">Deepforge Broadaxe</b><!--nend--><!--ndstart--><!--ndend--><span style="color: #ffd100"><br />Item Level <!--ilvl-->120</span><br /><!--bo-->Binds when equipped<table width="100%"><tr><td>Two-Hand</td><th><!--scstart2:1--><span class="q1">Axe</span><!--scend--></th></tr></table><table width="100%"><tr><td><span><!--dmg-->100 - 150 Damage</span></td><th>Speed <!--spd-->3.50</th></tr></table><!--dps-->(35.75 damage per second)<br /><!--re--><span class="q2">&lt;Random enchantment&gt;</span><!--ebstats--><!--egstats--><!--e--><!--ps--><br />Durability 85 / 85</td></tr></table><table><tr><td>Requires Level <!--rlvl-->70<div class="whtt-sellprice">Sell Price: <span class="moneygold">9</span> <span class="moneysilver">15</span> <span class="moneycopper">28</span></div></td></tr></table>
+]]>
+        </htmlTooltip>
+        <json>
+            <![CDATA[
+"appearances":{"0":[8534,"inv_throwingaxe_06"]},"classs":2,"commondrop":true,"displayid":8534,"dps":35.75,"flags2":8192,"id":25225,"level":120,"name":"6Deepforge Broadaxe","reqlevel":70,"slot":17,"slotbak":17,"source":[2],"specs":[250,252,70,71,72],"speed":3.50,"subclass":1
+]]>
+        </json>
+        <jsonEquip>
+            <![CDATA[
+"appearances":{"0":[8534,"inv_throwingaxe_06"]},"avgbuyout":888700,"displayid":8534,"dmgmax1":150,"dmgmin1":100,"dmgrange":0.40,"dmgtype1":0,"dps":35.75,"dura":85,"mledmgmax":150,"mledmgmin":100,"mledps":35.75,"mlespeed":3.50,"reqlevel":70,"sellprice":91528,"sheathtype":1,"slotbak":17,"speed":3.50
+]]>
+        </jsonEquip>
+        <link>http://www.wowhead.com/item=25225</link>
+    </item>
+</wowhead>

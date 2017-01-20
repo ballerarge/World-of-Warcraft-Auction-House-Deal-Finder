@@ -1,8 +1,8 @@
 package edu.rosehulman.fairchza.warcraft_auctionhouse_dealfinder;
 
 /**
- * Created by decramrj on 1/16/2017.
+ * Created by decramrj on 1/19/2017.
  */
 
-public class XMLParser {
+public class WowItem {
 }
