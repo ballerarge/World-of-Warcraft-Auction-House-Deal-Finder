@@ -3,7 +3,11 @@ package edu.rosehulman.fairchza.warcraft_auctionhouse_dealfinder;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.TextView;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -27,24 +31,41 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.Random;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AsyncResponse{
 
     private final int NUMITEMS = 1000000;
+    public ArrayList<WowItem> items;
+    private AsyncTask abcd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        final Random rand = new Random();
         String url = "";
-        String urlFront = "http://www.wowhead.com/item=128476";
-        String urlEnd = "&xml";
+        final String urlFront = "http://www.wowhead.com/item=";
+        final String urlEnd = "&xml";
+        Utils.XMLTask.resp = this;
 
         url = urlFront + urlEnd;
-        new Utils.XMLTask().execute(url);
+        Button button = (Button) findViewById(R.id.button);
+//        final String finalUrl = url;
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String urlMiddle = Integer.toString(rand.nextInt(200000));
+                String end = urlFront + urlMiddle + urlEnd;
+                Log.d("EEE", end);
+                new Utils.XMLTask().execute(end);
+            }
+        });
+//        new Utils.XMLTask().execute(url);
+
+
 
 //        for (int i = 100000; i < 200000; i++) {
 //            url = urlFront + Integer.toString(i) + urlEnd;
@@ -53,6 +74,15 @@ public class MainActivity extends AppCompatActivity {
 //        new Connect().execute();
 
 
+    }
+
+    @Override
+    public void ProcessFinish(WowItem item) {
+        TextView itemName = (TextView) findViewById(R.id.Name);
+        itemName.setText("Item Name: " + item.getName());
+        TextView itemInfo = (TextView) findViewById(R.id.Info);
+        itemInfo.setText("Subclass: " + item.getSubclass() + "\nQuality: " + item.getQuality()
+        + "\nItemLevel: " + item.getItemLevel() + "\nRequired Level: " + item.getRequiredLevel());
     }
 
 //    public Connection getConnection() throws SQLException {

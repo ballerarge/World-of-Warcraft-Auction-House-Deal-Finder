@@ -1,8 +1,14 @@
 package edu.rosehulman.fairchza.warcraft_auctionhouse_dealfinder;
 
 
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.database.DatabaseUtils;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Xml;
 
@@ -24,6 +30,7 @@ import java.util.List;
 public class Utils {
 
     public static class XMLTask extends AsyncTask<String, Void, WowItem> {
+        public static AsyncResponse resp = null;
 
         @Override
         protected WowItem doInBackground(String... urls) {
@@ -49,8 +56,9 @@ public class Utils {
             }
         }
 
-        protected void onPostExecute(WowItem item) {
+        protected void onPostExecute(final WowItem item) {
             if (item != null) {
+                resp.ProcessFinish(item);
                 System.out.println("Name of item: " + item.getName());
 //                System.out.println("Subclass of item: " + item.getSubclass());
 //                System.out.println("Quality of item: " + item.getQuality());
@@ -59,6 +67,7 @@ public class Utils {
 //                System.out.println("Level of item: " + item.getItemLevel());
 //                System.out.println("Item has sockets? " + item.isHasSockets());
 //                System.out.println("Required level of item: " + item.getRequiredLevel());
+
             } else {
 //                System.out.println("Number of item does not exist");
             }
