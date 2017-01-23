@@ -10,3 +10,14 @@ from the website. We didn't have much success with this aspect, as multiple
 different ways were tried to no avail. We plan on implementing the UI on the 
 back end of the milestone, as well as figuring out how to read and parse XML 
 files from the website to store the data.
+
+Sprint 1.0
+
+We finished up an XML parser to help us pull data off the the Wowhead website to
+get the item data. While this may not be permanent, it is used to currently to 
+get the data from the website, then back to the main activity to show data is being
+pulled.
+
+As for UI, there is only a very simplistic view to show that the data is working.
+We plan on making more views for the rest of the views in the later sprints, since
+making sure we had working data was of the utmost importance for this sprint.
