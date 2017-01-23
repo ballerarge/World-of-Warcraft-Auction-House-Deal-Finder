@@ -1,6 +1,7 @@
 package edu.rosehulman.fairchza.warcraft_auctionhouse_dealfinder;
 
 
+import android.database.DatabaseUtils;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.util.Xml;
@@ -22,38 +23,46 @@ import java.util.List;
 
 public class Utils {
 
-    public static class XMLTask extends AsyncTask<String, Void, List<WowItem>> {
+    public static class XMLTask extends AsyncTask<String, Void, WowItem> {
 
         @Override
-        protected List<WowItem> doInBackground(String... urls) {
-            List<WowItem> items = new ArrayList<>();
-
+        protected WowItem doInBackground(String... urls) {
             InputStream is = null;
+            WowItem wow = null;
             try {
                 is = new URL(urls[0]).openStream();
             } catch (IOException e) {
                 e.printStackTrace();
             }
             try {
-                items.add(XMLParser.parse(is));
+                wow = XMLParser.parse(is);
             } catch (XmlPullParserException e){
                 Log.e("EEE", e.toString());
             } catch (IOException e) {
                 Log.e("EEE", e.toString());
                 e.printStackTrace();
             }
-            return items;
+            if (wow != null) {
+                return wow;
+            } else {
+                return null;
+            }
         }
 
-        protected void onPostExecute(List<WowItem> itemList) {
-            System.out.println("Name of item: " + itemList.get(0).getName());
-            System.out.println("Subclass of item: " + itemList.get(0).getSubclass());
-            System.out.println("Quality of item: " + itemList.get(0).getQuality());
-            System.out.println("Id of item: " + itemList.get(0).getId());
-            System.out.println("Icon of item: " + itemList.get(0).getIcon());
-            System.out.println("Level of item: " + itemList.get(0).getItemLevel());
-            System.out.println("Item has sockets? " + itemList.get(0).isHasSockets());
-            System.out.println("Required level of item: " + itemList.get(0).getRequiredLevel());
+        protected void onPostExecute(WowItem item) {
+            if (item != null) {
+                System.out.println("Name of item: " + item.getName());
+//                System.out.println("Subclass of item: " + item.getSubclass());
+//                System.out.println("Quality of item: " + item.getQuality());
+//                System.out.println("Id of item: " + item.getId());
+//                System.out.println("Icon of item: " + item.getIcon());
+//                System.out.println("Level of item: " + item.getItemLevel());
+//                System.out.println("Item has sockets? " + item.isHasSockets());
+//                System.out.println("Required level of item: " + item.getRequiredLevel());
+            } else {
+//                System.out.println("Number of item does not exist");
+            }
+
         }
     }
 
@@ -73,40 +82,26 @@ public class Utils {
         }
 
         private static WowItem readXml(XmlPullParser parser) throws XmlPullParserException, IOException {
-            WowItem entry = new WowItem();
+            WowItem entry;
 
-            Log.d("TTT", "Start of readXML");
+            //Log.d("TTT", "Start of readXML");
             entry = readState(parser);
-//            while (parser.next() != XmlPullParser.END_TAG) {
-//                if (parser.getEventType() != XmlPullParser.START_TAG) {
-//                    continue;
-//                }
-//                String name = parser.getName();
-//
-//                // Starts looking for the entry tag
-//                if (name.equals("wowhead")) {
-//                    entries.add(readState(parser));
-//                } else {
-//                    skip(parser);
-//                }
-//            }
+
             return entry;
         }
 
         private static WowItem readState(XmlPullParser parser) throws XmlPullParserException, IOException {
-            //parser.require(XmlPullParser.START_TAG, ns, "wowhead");
-            //String itemId = parser.getAttributeValue(null, "id");
-            //Log.d("TTT", "Item id: " + itemId);
             WowItem item = new WowItem();
             while (parser.next() != XmlPullParser.END_DOCUMENT) {
                 if (parser.getEventType() != XmlPullParser.START_TAG) {
                     continue;
                 }
                 String name = parser.getName();
-                if (name.equals("item")) {
+                if (name.equals("error")) {
+                    return null;
+                } else if (name.equals("item")) {
                     String id = parser.getAttributeValue(null, "id");
                     item.setId(id);
-                    // WoWItem.addStuff(new Stuff with above)
                 } else if (name.equals("level")) {
                     int level = Integer.parseInt(parser.nextText());
                     item.setItemLevel(level);
@@ -125,8 +120,6 @@ public class Utils {
                 } else if (name.equals("jsonEquip")) {
                     String json = parser.nextText();
                     json = "{" + json + "}";
-                    System.out.println("The JSON is: " + json);
-
                     JsonInfo info = null;
                     ObjectMapper mapper = new ObjectMapper();
                     try {
