@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Warcraft_AuctionHouse_DealFinder</string>
+    <string name="item_name">Item Name:</string>
+    <string name="item_info">Item Info:</string>
 </resources>
