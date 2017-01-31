@@ -16,6 +16,7 @@ As for UI, there is only a very simplistic view to show that the data is working
 We plan on making more views for the rest of the views in the later sprints, since making 
 sure we had working data was of the utmost importance for this sprint.
 
+
 Sprint 1.5
 For the first half of Sprint 2, we tried working with JDBC to connect to The
 Undermine Journal database, but nothing proved effective in completing our objective. 
@@ -24,3 +25,9 @@ complicated. He suggested going to a talk on 1/31/17 regarding Python Flask, whi
 helpful in doing what we want. If not the case, RJ plans on asking Wilkin for 
 assistance in getting JDBC to work (or through another means) so that the firebase
 database can be set up by the end of the sprint.
+
+Once we figured out what we needed to do, we began to try to read XML files 
+from the website. We didn't have much success with this aspect, as multiple 
+different ways were tried to no avail. We plan on implementing the UI on the 
+back end of the milestone, as well as figuring out how to read and parse XML 
+files from the website to store the data.
