@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "929752951102",
+    "firebase_url": "https://wow-deal-finder.firebaseio.com",
+    "project_id": "wow-deal-finder",
+    "storage_bucket": "wow-deal-finder.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929752951102:android:f877f34ff1beccf1",
+        "android_client_info": {
+          "package_name": "edu.rosehulman.fairchza.warcraft_auctionhouse_dealfinder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "929752951102-p28jli8oi62qf1s6nseav5h0eeso82bl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrPgdqmwkeg_dRDUzZuixH_tDoxLmA1tI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
