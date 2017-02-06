@@ -42,9 +42,9 @@ public class ViewItemsFragment extends Fragment {
                              final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_view_items, container, false);
         mRecycler = (RecyclerView) view.findViewById(R.id.view_items_recycler);
-        mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new ViewItemsAdapter(myItems, getContext(), getActivity());
         mRecycler.setAdapter(mAdapter);
+        mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return view;
     }

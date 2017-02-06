@@ -20,4 +20,8 @@
     <string name="remove_dialog_option">Remove this item from your list?</string>
     <string name="add_item_prompt">What item would you like to add?</string>
     <string name="example_item_text">Ex: Sulfuras, Hand of Ragnaros</string>
+    <string name="inserted_level">Level: %1$s</string>
+    <string name="inserted_quality">Quality: %1$s</string>
+    <string name="inserted_price">Price: %1$s</string>
+    <string name="inserted_reqLevel">Required Level: %1$s</string>
 </resources>

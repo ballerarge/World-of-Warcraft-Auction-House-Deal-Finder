@@ -24,14 +24,14 @@ public class ViewItemsAdapter extends RecyclerView.Adapter<ViewItemsAdapter.View
 
     public ViewItemsAdapter(ArrayList<WowItem> items, Context context, Activity activity) {
         myItems = items;
-        Log.d("TTT", "Size of myItems: " + myItems.size());
         mContext = context;
         mActivity = activity;
     }
 
     @Override
     public ViewItemsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_view_item, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.row_view_item, parent, false);
+        Log.d("TTT", "Size of myItems: " + myItems.size());
         return new ViewHolder(view);
     }
 
@@ -39,10 +39,10 @@ public class ViewItemsAdapter extends RecyclerView.Adapter<ViewItemsAdapter.View
     public void onBindViewHolder(ViewItemsAdapter.ViewHolder holder, final int position) {
         final WowItem item = myItems.get(position);
         holder.mTitleTextView.setText(item.getName());
-        holder.mLevelTextView.setText(item.getLevel());
-        holder.mPriceTextView.setText(item.getPrice());
-        holder.mQualityTextView.setText(item.getQuality());
-        holder.mRequiredLevelTextView.setText(item.getRequiredLevel());
+        holder.mLevelTextView.setText(String.format(mContext.getResources().getString(R.string.inserted_level), item.getLevel()));
+        holder.mPriceTextView.setText(String.format(mContext.getResources().getString(R.string.inserted_price), item.getPrice()));
+        holder.mQualityTextView.setText(String.format(mContext.getResources().getString(R.string.inserted_quality), item.getQuality()));
+        holder.mRequiredLevelTextView.setText(String.format(mContext.getResources().getString(R.string.inserted_reqLevel), item.getRequiredLevel()));
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -71,7 +71,7 @@ public class ViewItemsAdapter extends RecyclerView.Adapter<ViewItemsAdapter.View
 
     @Override
     public int getItemCount() {
-        return 0;
+        return myItems.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

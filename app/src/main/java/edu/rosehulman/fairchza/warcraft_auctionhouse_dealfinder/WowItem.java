@@ -25,7 +25,7 @@ public class WowItem implements Parcelable {
                    String quality, String requiredLevel) {
         this.level = level;
         this.name_enus = name;
-        this.priceavg = price;
+        setPrice(price);
         setQuality(quality);
         this.requiredLevel = requiredLevel;
     }
@@ -59,7 +59,46 @@ public class WowItem implements Parcelable {
     }
 
     public void setPrice(String price) {
-        this.priceavg = price;
+        String copper = "0";
+        String silver = "0";
+        String gold = "0";
+
+        if (price.length() >= 1) {
+            copper = getNum(price);
+            price = price.substring(0, price.length() - 2);
+        }
+
+        if (price.length() >= 1) {
+            silver = getNum(price);
+            price = price.substring(0, price.length() - 2);
+        }
+
+        if (price.length() >= 1) {
+            gold = getNum(price);
+            price = price.substring(0, price.length() - 2);
+        }
+
+        if (copper.length() == 2 && copper.charAt(0) == '0') {
+            copper = copper.substring(1);
+        }
+
+        if (silver.length() == 2 && silver.charAt(0) == '0') {
+            silver = silver.substring(1);
+        }
+
+        if (gold.length() == 2 && gold.charAt(0) == '0') {
+            gold = gold.substring(1);
+        }
+
+        this.priceavg = "Gold: " + gold + ", Silver: " + silver + ", Copper: " + copper;
+    }
+
+    public String getNum(String price) {
+        if (price.length() <= 2) {
+            return price;
+        } else {
+            return price.substring(price.length() - 2, price.length());
+        }
     }
 
     public String getQuality() {
