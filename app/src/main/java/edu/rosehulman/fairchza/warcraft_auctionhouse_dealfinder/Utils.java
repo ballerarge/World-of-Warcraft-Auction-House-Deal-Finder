@@ -129,10 +129,10 @@ public class Utils {
 //                } else if (name.equals("jsonEquip")) {
 //                    String json = parser.nextText();
 //                    json = "{" + json + "}";
-//                    JsonInfo info = null;
+//                    JsonAuctionURL info = null;
 //                    ObjectMapper mapper = new ObjectMapper();
 //                    try {
-//                        info = mapper.readValue(json, JsonInfo.class);
+//                        info = mapper.readValue(json, JsonAuctionURL.class);
 //                    } catch (IOException e) {
 //                        Log.d("EEE", "ERROR:" + e.toString());
 //                    }
