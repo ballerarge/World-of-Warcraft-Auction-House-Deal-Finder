@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/deathwing"
     tools:context=".ViewItemsFragment"
-    android:id="@+id/view_items_recycler">
+    android:id="@+id/compare_items_recycler"
+    >
 
 </android.support.v7.widget.RecyclerView>

@@ -1,29 +1,57 @@
 package edu.rosehulman.fairchza.warcraft_auctionhouse_dealfinder;
 
+import android.content.SharedPreferences;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<WowItem> myItems;
+    private final static String PREFS = "PREFS";
+    private static final String ITEMS = "items";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        myItems = new ArrayList<>();
-        myItems.add(0, new WowItem("Sulfuras, Hand of Ragnaros", "80", "160402", "5", "60"));
-        myItems.add(0, new WowItem("Major Mana Potion", "59", "6000", "1", "49"));
+        SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+        String json = prefs.getString(ITEMS, "");
 
-        if (savedInstanceState == null) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            MainFragment fragment = MainFragment.newInstance(myItems);
-            ft.add(R.id.fragment_container, fragment);
-            ft.commit();
+        if (json.equals("")) {
+            myItems = new ArrayList<>();
+        } else {
+            Gson gson = new Gson();
+            myItems = gson.fromJson(json, new TypeToken<List<WowItem>>()
+            {
+            }.getType());
         }
+
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        MainFragment fragment = MainFragment.newInstance(myItems);
+        ft.add(R.id.fragment_container, fragment);
+        ft.commit();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(myItems);
+        editor = prefs.edit();
+        editor.remove(ITEMS).commit();
+        editor.putString(ITEMS, json);
+        editor.commit();
     }
 }

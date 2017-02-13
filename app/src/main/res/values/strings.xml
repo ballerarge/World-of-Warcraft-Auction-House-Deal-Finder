@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Warcraft_AuctionHouse_DealFinder</string>
+    <string name="app_name">WoW Auction House Deal Finder</string>
     <string name="item_name">Item Name:</string>
     <string name="item_info">Item Info:</string>
     <string name="world_of_warcraft_auction_house_deal_finder">World of Warcraft Auction House Deal Finder</string>
@@ -24,4 +24,5 @@
     <string name="inserted_quality">Quality: %1$s</string>
     <string name="inserted_price">Price: %1$s</string>
     <string name="inserted_reqLevel">Required Level: %1$s</string>
+    <string name="supp_items_prompt">The following is a list of the supported items:</string>
 </resources>

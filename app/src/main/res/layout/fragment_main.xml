@@ -2,19 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:padding="12dp"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/deathwing">
 
-    <TextView
-        android:text="@string/world_of_warcraft_auction_house_deal_finder"
-        android:textSize="30sp"
-        android:gravity="center"
-        android:textStyle="italic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp"
-        android:id="@+id/title" />
 
     <TextView
         android:text="@string/deal_display"
@@ -22,9 +12,11 @@
         android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/title"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_above="@+id/edit_items_button"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
         android:id="@+id/deal_range_display"/>
 
     <Button
@@ -34,7 +26,14 @@
         android:id="@+id/show_deals_button"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp" />
+        android:layout_marginBottom="20dp"
+        android:textColor="#A5B8A5"
+        android:textSize="30sp"
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"/>
 
     <Button
         android:text="@string/edit_deal_range"
@@ -43,7 +42,14 @@
         android:id="@+id/edit_deal_button"
         android:layout_above="@+id/show_deals_button"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp" />
+        android:layout_marginBottom="20dp"
+        android:textColor="#A5B8A5"
+        android:textSize="30sp"
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"/>
 
     <Button
         android:text="@string/edit_my_items"
@@ -52,5 +58,12 @@
         android:id="@+id/edit_items_button"
         android:layout_above="@+id/edit_deal_button"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp" />
+        android:layout_marginBottom="20dp"
+        android:textColor="#A5B8A5"
+        android:textSize="30sp"
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"/>
 </RelativeLayout>

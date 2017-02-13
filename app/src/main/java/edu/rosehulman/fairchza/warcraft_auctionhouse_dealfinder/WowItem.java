@@ -4,8 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
-import org.json.JSONObject;
-
 /**
  * Created by decramrj on 1/19/2017.
  */
@@ -16,18 +14,20 @@ public class WowItem implements Parcelable {
     private String name_enus;
     private String priceavg;
     private String quality;
-    private String requiredLevel;
+    private String requiredlevel;
+    private String id;
 
     public WowItem() {
     }
 
     public WowItem(String name, String level, String price,
-                   String quality, String requiredLevel) {
+                   String quality, String requiredlevel, String id) {
         this.level = level;
         this.name_enus = name;
-        setPrice(price);
+        setPriceavg(price);
         setQuality(quality);
-        this.requiredLevel = requiredLevel;
+        this.requiredlevel = requiredlevel;
+        this.id = id;
     }
 
     protected WowItem(Parcel in) {
@@ -35,7 +35,16 @@ public class WowItem implements Parcelable {
         name_enus = in.readString();
         priceavg = in.readString();
         quality = in.readString();
-        requiredLevel = in.readString();
+        requiredlevel = in.readString();
+        id = in.readString();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getLevel() {
@@ -46,36 +55,51 @@ public class WowItem implements Parcelable {
         this.level = level;
     }
 
-    public String getName() {
+    public String getName_enus() {
         return name_enus;
     }
 
-    public void setName(String name) {
+    public void setName_enus(String name) {
         this.name_enus = name;
     }
 
-    public String getPrice() {
+    public String getPriceavg() {
         return priceavg;
     }
 
-    public void setPrice(String price) {
+    public void setPriceavg(String price) {
         String copper = "0";
         String silver = "0";
         String gold = "0";
 
+        Log.d("TTT", "Price with copper: " + price);
         if (price.length() >= 1) {
             copper = getNum(price);
-            price = price.substring(0, price.length() - 2);
+            if (price.length() == 1) {
+                price = price.substring(0, price.length() - 1);
+            } else {
+                price = price.substring(0, price.length() - 2);
+            }
         }
 
+        Log.d("TTT", "Price with silver: " + price);
         if (price.length() >= 1) {
             silver = getNum(price);
-            price = price.substring(0, price.length() - 2);
+            if (price.length() == 1) {
+                price = price.substring(0, price.length() - 1);
+            } else {
+                price = price.substring(0, price.length() - 2);
+            }
         }
 
+        Log.d("TTT", "Price with gold: " + price);
         if (price.length() >= 1) {
             gold = getNum(price);
-            price = price.substring(0, price.length() - 2);
+            if (price.length() == 1) {
+                price = price.substring(0, price.length() - 1);
+            } else {
+                price = price.substring(0, price.length() - 2);
+            }
         }
 
         if (copper.length() == 2 && copper.charAt(0) == '0') {
@@ -125,11 +149,11 @@ public class WowItem implements Parcelable {
     }
 
     public String getRequiredLevel() {
-        return requiredLevel;
+        return requiredlevel;
     }
 
     public void setRequiredLevel(String requiredLevel) {
-        this.requiredLevel = requiredLevel;
+        this.requiredlevel = requiredLevel;
     }
 
 
@@ -145,7 +169,8 @@ public class WowItem implements Parcelable {
         dest.writeString(name_enus);
         dest.writeString(priceavg);
         dest.writeString(quality);
-        dest.writeString(requiredLevel);
+        dest.writeString(requiredlevel);
+        dest.writeString(id);
     }
 
     public static final Creator<WowItem> CREATOR = new Creator<WowItem>() {
@@ -159,91 +184,5 @@ public class WowItem implements Parcelable {
             return new WowItem[size];
         }
     };
-
-    //    private String id; // Done
-//    private String name;
-//    private String icon; // Done, maybe
-//    //private JSONObject itemSpells;
-//    private int itemLevel; // Done
-//    private String quality; // Done
-//    private int requiredLevel; // Done
-//    private boolean hasSockets; // Done
-//    private String subclass; // Done
-//
-//    public WowItem () {
-//        hasSockets = false;
-//    }
-//
-//    public String getSubclass() {
-//        return subclass;
-//    }
-//
-//    public void setSubclass(String subclass) {
-//        this.subclass = subclass;
-//    }
-//
-//    public String getId() {
-//        return id;
-//    }
-//
-//    public void setId(String id) {
-//        this.id = id;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    public String getIcon() {
-//        return icon;
-//    }
-//
-//    public void setIcon(String icon) {
-//        this.icon = icon;
-//    }
-//
-////    public JSONObject getItemSpells() {
-////        return itemSpells;
-////    }
-////
-////    public void setItemSpells(JSONObject itemSpells) {
-////        this.itemSpells = itemSpells;
-////    }
-//
-//    public int getItemLevel() {
-//        return itemLevel;
-//    }
-//
-//    public void setItemLevel(int itemLevel) {
-//        this.itemLevel = itemLevel;
-//    }
-//
-//    public String getQuality() {
-//        return quality;
-//    }
-//
-//    public void setQuality(String quality) {
-//        this.quality = quality;
-//    }
-//
-//    public int getRequiredLevel() {
-//        return requiredLevel;
-//    }
-//
-//    public void setRequiredLevel(int requiredLevel) {
-//        this.requiredLevel = requiredLevel;
-//    }
-//
-//    public boolean isHasSockets() {
-//        return hasSockets;
-//    }
-//
-//    public void setHasSockets(boolean hasSockets) {
-//        this.hasSockets = hasSockets;
-//    }
 
 }

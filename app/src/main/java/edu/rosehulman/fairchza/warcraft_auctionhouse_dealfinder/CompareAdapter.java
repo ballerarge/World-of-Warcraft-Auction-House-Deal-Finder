@@ -1,9 +1,6 @@
 package edu.rosehulman.fairchza.warcraft_auctionhouse_dealfinder;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,59 +10,34 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by decramrj on 2/5/2017.
+ * Created by decramrj on 2/12/2017.
  */
-public class ViewItemsAdapter extends RecyclerView.Adapter<ViewItemsAdapter.ViewHolder> {
+public class CompareAdapter extends RecyclerView.Adapter<CompareAdapter.ViewHolder>{
 
     private ArrayList<WowItem> myItems;
     private Context mContext;
-    private Activity mActivity;
+    private int dealRange;
 
-    public ViewItemsAdapter(ArrayList<WowItem> items, Context context, Activity activity) {
+    public CompareAdapter(ArrayList<WowItem> items, Context context, int deal) {
         myItems = items;
         mContext = context;
-        mActivity = activity;
+        dealRange = deal;
     }
 
     @Override
-    public ViewItemsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CompareAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.row_view_item, parent, false);
-        return new ViewHolder(view);
+        return new CompareAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewItemsAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(CompareAdapter.ViewHolder holder, final int position) {
         final WowItem item = myItems.get(position);
         holder.mTitleTextView.setText(item.getName_enus());
         holder.mLevelTextView.setText(String.format(mContext.getResources().getString(R.string.inserted_level), item.getLevel()));
         holder.mPriceTextView.setText(String.format(mContext.getResources().getString(R.string.inserted_price), item.getPriceavg()));
         holder.mQualityTextView.setText(String.format(mContext.getResources().getString(R.string.inserted_quality), item.getQuality()));
         holder.mRequiredLevelTextView.setText(String.format(mContext.getResources().getString(R.string.inserted_reqLevel), item.getRequiredLevel()));
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                builder.setTitle(R.string.remove_dialog_option);
-                View view = mActivity.getLayoutInflater().inflate(R.layout.dialog_delete, null, false);
-                builder.setView(view);
-
-                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        myItems.remove(position);
-                        notifyItemRangeChanged(position, myItems.size());
-                        notifyItemRemoved(position);
-                        notifyDataSetChanged();
-                    }
-                });
-
-                builder.setNegativeButton(android.R.string.cancel, null);
-
-                builder.create().show();
-
-                return true;
-            }
-        });
     }
 
     @Override
