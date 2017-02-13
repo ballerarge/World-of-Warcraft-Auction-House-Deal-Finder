@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -63,6 +65,18 @@ public class MyItemsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_items, container, false);
         Button basicItemSearch = (Button) view.findViewById(R.id.basic_item_button);
         Button viewMyItems = (Button) view.findViewById(R.id.view_items_button);
+        ImageButton supportedItems = (ImageButton) view.findViewById(R.id.supported_items_button);
+
+        supportedItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                SupportedItemsFragment fragment = new SupportedItemsFragment();
+                ft.replace(R.id.fragment_container, fragment);
+                ft.addToBackStack("myItems");
+                ft.commit();
+            }
+        });
 
         viewMyItems.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,18 +102,20 @@ public class MyItemsFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         final String itemName = itemEditText.getText().toString();
-                        myItemRef = mItemRef.limitToFirst(10);
+                        myItemRef = mItemRef.orderByValue();
                         myItemRef.keepSynced(true);
                         myItemRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 System.out.println("HERE");
+                                int currSize = myItems.size();
                                 for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
-                                    myItems.add(0, eventSnapshot.getValue(WowItem.class));
-//                                    if (eventSnapshot.child("name_enus").equals(itemName)) {
-//                                        myItems.add(0, eventSnapshot.getValue(WowItem.class));
-//                                        Log.d("TTT", "IT DID IT!");
-//                                    }
+                                    if (eventSnapshot.child("name_enus").getValue().equals(itemName)) {
+                                        myItems.add(0, eventSnapshot.getValue(WowItem.class));
+                                    }
+                                }
+                                if (currSize == myItems.size()) {
+                                    Toast.makeText(getContext(), "Item not found", Toast.LENGTH_SHORT).show();
                                 }
                             }
 

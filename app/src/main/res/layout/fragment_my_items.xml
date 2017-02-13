@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/deathwing">
 
     <Button
         android:text="@string/basic_item_search"
@@ -10,7 +12,14 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="127dp"
-        android:id="@+id/basic_item_button" />
+        android:id="@+id/basic_item_button"
+        android:textColor="#A5B8A5"
+        android:textSize="30sp"
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"/>
 
     <Button
         android:text="@string/view_my_items"
@@ -19,5 +28,22 @@
         android:layout_below="@+id/basic_item_button"
         android:layout_marginTop="130dp"
         android:layout_centerHorizontal="true"
-        android:id="@+id/view_items_button" />
+        android:id="@+id/view_items_button"
+        android:textColor="#A5B8A5"
+        android:textSize="30sp"
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/wow_question_mark"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/supported_items_button"
+        />
+
 </RelativeLayout>

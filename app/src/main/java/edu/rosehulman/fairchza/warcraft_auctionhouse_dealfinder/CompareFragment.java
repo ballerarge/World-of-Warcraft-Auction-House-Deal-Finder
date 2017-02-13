@@ -11,19 +11,23 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 /**
- * Created by decramrj on 2/5/2017.
+ * Created by decramrj on 2/12/2017.
  */
-public class ViewItemsFragment extends Fragment {
+
+public class CompareFragment extends Fragment {
 
     private static final String ARG_ITEMS = "items";
-    private RecyclerView mRecycler;
-    private ViewItemsAdapter mAdapter;
+    private static final String ARG_DEAL = "deal";
+    private int deal;
     private ArrayList<WowItem> myItems;
+    private RecyclerView mRecycler;
+    private CompareAdapter mAdapter;
 
-    public static ViewItemsFragment newInstance(ArrayList<WowItem> myItems) {
-        ViewItemsFragment fragment = new ViewItemsFragment();
+    public static CompareFragment newInstance(ArrayList<WowItem> myItems, int dealRange) {
+        CompareFragment fragment = new CompareFragment();
         Bundle args = new Bundle();
         args.putParcelableArrayList(ARG_ITEMS, myItems);
+        args.putInt(ARG_DEAL, dealRange);
         fragment.setArguments(args);
         return fragment;
     }
@@ -33,20 +37,19 @@ public class ViewItemsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             myItems = getArguments().getParcelableArrayList(ARG_ITEMS);
+            deal = getArguments().getInt(ARG_DEAL);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              final Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_view_items, container, false);
-        mRecycler = (RecyclerView) view.findViewById(R.id.view_items_recycler);
-        mAdapter = new ViewItemsAdapter(myItems, getContext(), getActivity());
+        View view = inflater.inflate(R.layout.fragment_compare, container, false);
+        mRecycler = (RecyclerView) view.findViewById(R.id.compare_items_recycler);
+        mAdapter = new CompareAdapter(myItems, getContext(), deal);
         mRecycler.setAdapter(mAdapter);
         mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return view;
     }
-
-
 }

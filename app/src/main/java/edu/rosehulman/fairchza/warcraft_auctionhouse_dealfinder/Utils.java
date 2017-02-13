@@ -59,7 +59,6 @@ public class Utils {
         protected void onPostExecute(final WowItem item) {
             if (item != null) {
                 resp.ProcessFinish(item);
-                System.out.println("Name of item: " + item.getName());
 //                System.out.println("Subclass of item: " + item.getSubclass());
 //                System.out.println("Quality of item: " + item.getQuality());
 //                System.out.println("Id of item: " + item.getId());

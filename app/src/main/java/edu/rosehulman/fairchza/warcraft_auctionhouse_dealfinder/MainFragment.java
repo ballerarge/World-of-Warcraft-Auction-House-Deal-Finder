@@ -91,6 +91,17 @@ public class MainFragment extends Fragment {
             }
         });
 
+        showDeals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                CompareFragment fragment = CompareFragment.newInstance(myItems, dealRange);
+                ft.replace(R.id.fragment_container, fragment);
+                ft.addToBackStack("mainFragment");
+                ft.commit();
+            }
+        });
+
 
         return view;
     }
