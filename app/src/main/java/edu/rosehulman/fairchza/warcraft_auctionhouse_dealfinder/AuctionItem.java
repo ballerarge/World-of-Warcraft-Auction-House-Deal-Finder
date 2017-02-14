@@ -108,18 +108,18 @@ public class AuctionItem {
     public void setcontext(Integer context) {
     }
 
-    public String getbonusLists() {
+    public List getbonusLists() {
         return null;
     }
 
-    public void setbonusLists(){
+    public void setbonusLists(List bonus){
 
     }
 
-    public String getmodifiers(){
+    public List getmodifiers(){
         return null;
     }
-    public void setmodifies(){
+    public void setmodifiers(List mods){
 
     }
 }
