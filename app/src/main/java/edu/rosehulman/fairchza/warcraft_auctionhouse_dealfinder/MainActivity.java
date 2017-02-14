@@ -16,6 +16,8 @@ import org.jsoup.nodes.Element;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +32,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         myAuctions = new ArrayList<AuctionItem>();
+        Timer time = new Timer();
+        TimerTask updateData = new TimerTask() {
+            @Override
+            public void run() {
+                new JsonAuctionURL().execute();
+            }
+        };
+        time.schedule(updateData, 1000*60*60);
         new JsonAuctionURL().execute();
 
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);

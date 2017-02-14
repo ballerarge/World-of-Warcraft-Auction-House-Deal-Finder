@@ -41,13 +41,13 @@ public class JsonAuctionData extends AsyncTask<String, Object, ArrayList<Auction
             json_first = json_first.substring(0,breaker);
             json_first = json_first + "]" + "}";
 
-            Integer numSplits = (json.length()-3000)/3000;
-            Log.d("NUMBER OF SPLITS NEEDED", Integer.toString(numSplits));
+            Integer numSplits = (json.length()-breaker)/3000;
+//            Log.d("NUMBER OF SPLITS NEEDED", Integer.toString(numSplits));
             String opener = json.substring(0,214);
-            for(int i=0; i <200; i++){
+            for(int i=0; i <310; i++){
                     String json2 = json.substring(breaker, breaker+3000);
                     int lastIndex = json2.lastIndexOf(", {\"auc");
-                    Log.d("lastIndex", Integer.toString(lastIndex));
+//                    Log.d("lastIndex", Integer.toString(lastIndex));
                     breaker = breaker + lastIndex;
                     String json3 = json2.substring(11, lastIndex);
 //                a = breaker;
@@ -67,11 +67,11 @@ public class JsonAuctionData extends AsyncTask<String, Object, ArrayList<Auction
                     json3 = json3.substring(0, json3.length()-1);
                 }
                 jsons.add(opener + json3 + "]" + "}");
-                Log.d("LENGTH",Integer.toString(jsons.get(i).length()));
-                Log.d("STRING", jsons.get(i));
+//                Log.d("LENGTH",Integer.toString(jsons.get(i).length()));
+//                Log.d("STRING", jsons.get(i));
             }
             json = json_first;
-            Log.d("String length",Integer.toString(json.length()));
+//            Log.d("String length",Integer.toString(json.length()));
 //            String json2 = json.substring(3001, 7293);
 //            json2 = opener + json2 + "]" +"}";
             Log.d("JsonAuctionData", json);
@@ -92,7 +92,7 @@ public class JsonAuctionData extends AsyncTask<String, Object, ArrayList<Auction
             } catch (IOException e) {
                 Log.d("EEE", "ERROR:" + e.toString());
             }
-            for(int i=0; i < 200; i++) {
+            for(int i=0; i < 310; i++) {
                 try {
 //                json = '(' + json + ')';
                     JsonRealmAndAuctions info = mapper.readValue(jsons.get(i), JsonRealmAndAuctions.class);
@@ -120,7 +120,11 @@ public class JsonAuctionData extends AsyncTask<String, Object, ArrayList<Auction
     protected void onPostExecute(ArrayList<AuctionItem> auctionItems) {
         if(auctionItems !=null) {
             MainActivity.myAuctions = auctionItems;
+            for(int i =0; i < 100; i++){
+                Log.d("First 100 Items", MainActivity.myAuctions.get(i).getItem().toString());
+            }
         }
         Log.d("AT THE END THERE ARE",Integer.toString(MainActivity.myAuctions.size()));
+
     }
 }
