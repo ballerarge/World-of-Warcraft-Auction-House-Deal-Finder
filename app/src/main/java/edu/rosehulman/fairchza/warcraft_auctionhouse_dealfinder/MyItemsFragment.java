@@ -22,7 +22,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.concurrent.CountDownLatch;
 
 /**
  * Created by decramrj on 2/4/2017.
@@ -35,7 +34,6 @@ public class MyItemsFragment extends Fragment {
     private ArrayList<WowItem> myItems;
     private DatabaseReference mItemRef;
     private Query myItemRef;
-    //private WowItem newItem;
 
     public MyItemsFragment() {
     }

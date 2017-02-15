@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by decramrj on 2/4/2017.
@@ -22,19 +21,22 @@ import java.util.List;
 public class MainFragment extends Fragment {
 
     // Figure out how to use this below. Will need it.
-    private int dealRange = 0;
+    private int dealRange = 100;
 
     private static final String ARG_ITEMS = "items";
+    private static final String ARG_AUCTIONS = "auctions";
 
-    private ArrayList<WowItem> myItems = new ArrayList<>();
+    private ArrayList<WowItem> myItems;
+    private ArrayList<AuctionItem> myAuctions;
 
     public MainFragment() {
     }
 
-    public static MainFragment newInstance(ArrayList<WowItem> myItems) {
+    public static MainFragment newInstance(ArrayList<WowItem> myItems, ArrayList<AuctionItem> auctions) {
         MainFragment fragment = new MainFragment();
         Bundle args = new Bundle();
         args.putParcelableArrayList(ARG_ITEMS, myItems);
+        args.putParcelableArrayList(ARG_AUCTIONS, auctions);
         fragment.setArguments(args);
         return fragment;
     }
@@ -44,6 +46,7 @@ public class MainFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             myItems = getArguments().getParcelableArrayList(ARG_ITEMS);
+            myAuctions = MainActivity.myAuctions;
         }
     }
 
@@ -95,7 +98,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                CompareFragment fragment = CompareFragment.newInstance(myItems, dealRange);
+                CompareFragment fragment = CompareFragment.newInstance(myItems, myAuctions, dealRange);
                 ft.replace(R.id.fragment_container, fragment);
                 ft.addToBackStack("mainFragment");
                 ft.commit();

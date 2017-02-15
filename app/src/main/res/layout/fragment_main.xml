@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="12dp"
     android:layout_height="match_parent"
     android:background="@drawable/deathwing">
 
-
-    <TextView
-        android:text="@string/deal_display"
-        android:textSize="20sp"
-        android:gravity="center"
+    <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        app:cardBackgroundColor="#CF061A"
+        android:layout_margin="4dp"
         android:layout_above="@+id/edit_items_button"
-        android:layout_marginBottom="10dp"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
-        android:id="@+id/deal_range_display"/>
+        android:layout_centerHorizontal="true"
+        app:cardCornerRadius="8dp">
+        <TextView
+            android:text="@string/deal_display"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:textStyle="bold"
+            android:textColor="#A8A8A8"
+            android:id="@+id/deal_range_display"/>
+    </android.support.v7.widget.CardView>
+
 
     <Button
         android:text="@string/show_me_deals"

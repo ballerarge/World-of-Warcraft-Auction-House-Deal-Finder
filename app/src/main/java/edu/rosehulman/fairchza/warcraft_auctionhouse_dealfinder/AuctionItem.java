@@ -1,5 +1,8 @@
 package edu.rosehulman.fairchza.warcraft_auctionhouse_dealfinder;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
@@ -8,7 +11,7 @@ import java.util.List;
  * Created by fairchza on 2/12/2017.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AuctionItem {
+public class AuctionItem implements Parcelable {
     private Integer item;
     private Integer buyout;
     private Integer quantity;
@@ -122,5 +125,35 @@ public class AuctionItem {
     public void setmodifiers(List mods){
 
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    protected AuctionItem(Parcel in) {
+        item = Integer.parseInt(in.readString());
+        buyout = Integer.parseInt(in.readString());
+        quantity = Integer.parseInt(in.readString());
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(Integer.toString(item));
+        dest.writeString(Integer.toString(buyout));
+        dest.writeString(Integer.toString(quantity));
+    }
+
+    public static final Creator<AuctionItem> CREATOR = new Creator<AuctionItem>() {
+        @Override
+        public AuctionItem createFromParcel(Parcel in) {
+            return new AuctionItem(in);
+        }
+
+        @Override
+        public AuctionItem[] newArray(int size) {
+            return new AuctionItem[size];
+        }
+    };
 }
 

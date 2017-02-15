@@ -18,15 +18,19 @@ public class CompareFragment extends Fragment {
 
     private static final String ARG_ITEMS = "items";
     private static final String ARG_DEAL = "deal";
+    private static final String ARG_AUCTIONS = "auctions";
+
     private int deal;
+    private ArrayList<AuctionItem> myAuctions;
     private ArrayList<WowItem> myItems;
     private RecyclerView mRecycler;
     private CompareAdapter mAdapter;
 
-    public static CompareFragment newInstance(ArrayList<WowItem> myItems, int dealRange) {
+    public static CompareFragment newInstance(ArrayList<WowItem> myItems, ArrayList<AuctionItem> auctions, int dealRange) {
         CompareFragment fragment = new CompareFragment();
         Bundle args = new Bundle();
         args.putParcelableArrayList(ARG_ITEMS, myItems);
+        args.putParcelableArrayList(ARG_AUCTIONS, auctions);
         args.putInt(ARG_DEAL, dealRange);
         fragment.setArguments(args);
         return fragment;
@@ -38,6 +42,7 @@ public class CompareFragment extends Fragment {
         if (getArguments() != null) {
             myItems = getArguments().getParcelableArrayList(ARG_ITEMS);
             deal = getArguments().getInt(ARG_DEAL);
+            myAuctions = MainActivity.myAuctions;
         }
     }
 
@@ -46,7 +51,7 @@ public class CompareFragment extends Fragment {
                              final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_compare, container, false);
         mRecycler = (RecyclerView) view.findViewById(R.id.compare_items_recycler);
-        mAdapter = new CompareAdapter(myItems, getContext(), deal);
+        mAdapter = new CompareAdapter(myItems, getContext(), deal, myAuctions);
         mRecycler.setAdapter(mAdapter);
         mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
 

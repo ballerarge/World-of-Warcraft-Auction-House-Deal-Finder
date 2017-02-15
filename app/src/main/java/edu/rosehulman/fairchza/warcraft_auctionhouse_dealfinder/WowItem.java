@@ -16,7 +16,7 @@ public class WowItem implements Parcelable {
     private String quality;
     private String requiredlevel;
     private String id;
-
+    private String priceNum;
     public WowItem() {
     }
 
@@ -68,21 +68,11 @@ public class WowItem implements Parcelable {
     }
 
     public void setPriceavg(String price) {
+        this.priceNum = price;
         String copper = "0";
         String silver = "0";
         String gold = "0";
 
-        Log.d("TTT", "Price with copper: " + price);
-        if (price.length() >= 1) {
-            copper = getNum(price);
-            if (price.length() == 1) {
-                price = price.substring(0, price.length() - 1);
-            } else {
-                price = price.substring(0, price.length() - 2);
-            }
-        }
-
-        Log.d("TTT", "Price with silver: " + price);
         if (price.length() >= 1) {
             silver = getNum(price);
             if (price.length() == 1) {
@@ -92,14 +82,8 @@ public class WowItem implements Parcelable {
             }
         }
 
-        Log.d("TTT", "Price with gold: " + price);
         if (price.length() >= 1) {
-            gold = getNum(price);
-            if (price.length() == 1) {
-                price = price.substring(0, price.length() - 1);
-            } else {
-                price = price.substring(0, price.length() - 2);
-            }
+            gold = price;
         }
 
         if (copper.length() == 2 && copper.charAt(0) == '0') {
@@ -114,7 +98,7 @@ public class WowItem implements Parcelable {
             gold = gold.substring(1);
         }
 
-        this.priceavg = "Gold: " + gold + ", Silver: " + silver + ", Copper: " + copper;
+        this.priceavg = gold + "g " + silver + "s " + copper + "c";
     }
 
     public String getNum(String price) {
@@ -157,6 +141,13 @@ public class WowItem implements Parcelable {
     }
 
 
+    public String getPriceNum() {
+        return priceNum;
+    }
+
+    public void setPriceNum(String priceNum) {
+        this.priceNum = priceNum;
+    }
 
     @Override
     public int describeContents() {

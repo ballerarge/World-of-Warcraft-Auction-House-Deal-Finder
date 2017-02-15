@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        myAuctions = new ArrayList<AuctionItem>();
+        myAuctions = new ArrayList<>();
         Timer time = new Timer();
         TimerTask updateData = new TimerTask() {
             @Override
@@ -54,11 +54,11 @@ public class MainActivity extends AppCompatActivity {
             }.getType());
         }
 
-
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        MainFragment fragment = MainFragment.newInstance(myItems);
+        MainFragment fragment = MainFragment.newInstance(myItems, myAuctions);
         ft.add(R.id.fragment_container, fragment);
         ft.commit();
+
     }
 
     @Override

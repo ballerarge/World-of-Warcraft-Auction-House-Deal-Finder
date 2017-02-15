@@ -25,7 +25,7 @@ public class JsonAuctionData extends AsyncTask<String, Object, ArrayList<Auction
 
     @Override
     protected ArrayList<AuctionItem> doInBackground(String... strings) {
-        ArrayList<AuctionItem> items = new ArrayList<AuctionItem>();
+        ArrayList<AuctionItem> items = new ArrayList<>();
         Document doc = null;
         try {
             doc = Jsoup.connect(strings[0]).ignoreContentType(true).get();
@@ -120,10 +120,8 @@ public class JsonAuctionData extends AsyncTask<String, Object, ArrayList<Auction
     protected void onPostExecute(ArrayList<AuctionItem> auctionItems) {
         if(auctionItems !=null) {
             MainActivity.myAuctions = auctionItems;
-            for(int i =0; i < 100; i++){
-                Log.d("First 100 Items", MainActivity.myAuctions.get(i).getItem().toString());
-            }
         }
+
         Log.d("AT THE END THERE ARE",Integer.toString(MainActivity.myAuctions.size()));
 
     }

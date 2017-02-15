@@ -22,7 +22,11 @@
     <string name="example_item_text">Ex: Sulfuras, Hand of Ragnaros</string>
     <string name="inserted_level">Level: %1$s</string>
     <string name="inserted_quality">Quality: %1$s</string>
-    <string name="inserted_price">Price: %1$s</string>
+    <string name="inserted_price">Average Price: %1$s</string>
     <string name="inserted_reqLevel">Required Level: %1$s</string>
+    <string name="inserted_buyout">Buyout Price: %1$s</string>
+    <string name="inserted_quantity">Quantity: %1$s</string>
     <string name="supp_items_prompt">The following is a list of the supported items:</string>
+    <string name="default_buyout_price">Buyout Price</string>
+    <string name="default_quantity_number">Default quantity number</string>
 </resources>
