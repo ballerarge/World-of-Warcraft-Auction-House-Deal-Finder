@@ -59,7 +59,6 @@ public class Utils {
         protected void onPostExecute(final WowItem item) {
             if (item != null) {
                 resp.ProcessFinish(item);
-                System.out.println("Name of item: " + item.getName());
 //                System.out.println("Subclass of item: " + item.getSubclass());
 //                System.out.println("Quality of item: " + item.getQuality());
 //                System.out.println("Id of item: " + item.getId());
@@ -101,51 +100,51 @@ public class Utils {
 
         private static WowItem readState(XmlPullParser parser) throws XmlPullParserException, IOException {
             WowItem item = new WowItem();
-            while (parser.next() != XmlPullParser.END_DOCUMENT) {
-                if (parser.getEventType() != XmlPullParser.START_TAG) {
-                    continue;
-                }
-                String name = parser.getName();
-                if (name.equals("error")) {
-                    return null;
-                } else if (name.equals("item")) {
-                    String id = parser.getAttributeValue(null, "id");
-                    item.setId(id);
-                } else if (name.equals("level")) {
-                    int level = Integer.parseInt(parser.nextText());
-                    item.setItemLevel(level);
-                } else if (name.equals("name")) {
-                    String itemName = parser.nextText();
-                    item.setName(itemName);
-                } else if (name.equals("quality")) {
-                    String quality = parser.nextText();
-                    item.setQuality(quality);
-                } else if (name.equals("icon")) {
-                    String icon = parser.getAttributeValue(null, "displayId");
-                    item.setIcon(icon);
-                } else if (name.equals("subclass")) {
-                    String subClass = parser.nextText();
-                    item.setSubclass(subClass);
-                } else if (name.equals("jsonEquip")) {
-                    String json = parser.nextText();
-                    json = "{" + json + "}";
-                    JsonInfo info = null;
-                    ObjectMapper mapper = new ObjectMapper();
-                    try {
-                        info = mapper.readValue(json, JsonInfo.class);
-                    } catch (IOException e) {
-                        Log.d("EEE", "ERROR:" + e.toString());
-                    }
-                    if (info.getNsockets() != 0) {
-                        item.setHasSockets(true);
-                    } else {
-                        item.setHasSockets(false);
-                    }
-                    item.setRequiredLevel(info.getReqlevel());
-                } else {
-                    skip(parser);
-                }
-            }
+//            while (parser.next() != XmlPullParser.END_DOCUMENT) {
+//                if (parser.getEventType() != XmlPullParser.START_TAG) {
+//                    continue;
+//                }
+//                String name = parser.getName();
+//                if (name.equals("error")) {
+//                    return null;
+//                } else if (name.equals("item")) {
+//                    String id = parser.getAttributeValue(null, "id");
+//                    item.setId(id);
+//                } else if (name.equals("level")) {
+//                    int level = Integer.parseInt(parser.nextText());
+//                    item.setItemLevel(level);
+//                } else if (name.equals("name")) {
+//                    String itemName = parser.nextText();
+//                    item.setName(itemName);
+//                } else if (name.equals("quality")) {
+//                    String quality = parser.nextText();
+//                    item.setQuality(quality);
+//                } else if (name.equals("icon")) {
+//                    String icon = parser.getAttributeValue(null, "displayId");
+//                    item.setIcon(icon);
+//                } else if (name.equals("subclass")) {
+//                    String subClass = parser.nextText();
+//                    item.setSubclass(subClass);
+//                } else if (name.equals("jsonEquip")) {
+//                    String json = parser.nextText();
+//                    json = "{" + json + "}";
+//                    JsonAuctionURL info = null;
+//                    ObjectMapper mapper = new ObjectMapper();
+//                    try {
+//                        info = mapper.readValue(json, JsonAuctionURL.class);
+//                    } catch (IOException e) {
+//                        Log.d("EEE", "ERROR:" + e.toString());
+//                    }
+//                    if (info.getNsockets() != 0) {
+//                        item.setHasSockets(true);
+//                    } else {
+//                        item.setHasSockets(false);
+//                    }
+//                    item.setRequiredLevel(info.getReqlevel());
+//                } else {
+//                    skip(parser);
+//                }
+//            }
             // Return WoWItem
             return item;
         }

@@ -1,5 +1,32 @@
 <resources>
-    <string name="app_name">Warcraft_AuctionHouse_DealFinder</string>
+    <string name="app_name">WoW Auction House Deal Finder</string>
     <string name="item_name">Item Name:</string>
     <string name="item_info">Item Info:</string>
+    <string name="world_of_warcraft_auction_house_deal_finder">World of Warcraft Auction House Deal Finder</string>
+    <string name="edit_my_items">Edit my items</string>
+    <string name="edit_deal_range">Edit deal range</string>
+    <string name="show_me_deals">Show me deals</string>
+    <string name="deal_display">Deal %: _________</string>
+    <string name="deal_display_default">Deal %: </string>
+    <string name="deal_builder_title">Set deal range</string>
+    <string name="caption">X Percent</string>
+    <string name="view_my_items">View My Items</string>
+    <string name="basic_item_search">Basic Item Search</string>
+    <string name="default_item_title">Default item title</string>
+    <string name="default_level">Default level</string>
+    <string name="default_price">Default price</string>
+    <string name="default_quality">Default quality</string>
+    <string name="default_required_level">Default required level</string>
+    <string name="remove_dialog_option">Remove this item from your list?</string>
+    <string name="add_item_prompt">What item would you like to add?</string>
+    <string name="example_item_text">Ex: Sulfuras, Hand of Ragnaros</string>
+    <string name="inserted_level">Level: %1$s</string>
+    <string name="inserted_quality">Quality: %1$s</string>
+    <string name="inserted_price">Average Price: %1$s</string>
+    <string name="inserted_reqLevel">Required Level: %1$s</string>
+    <string name="inserted_buyout">Buyout Price: %1$s</string>
+    <string name="inserted_quantity">Quantity: %1$s</string>
+    <string name="supp_items_prompt">The following is a list of the supported items:</string>
+    <string name="default_buyout_price">Buyout Price</string>
+    <string name="default_quantity_number">Default quantity number</string>
 </resources>
