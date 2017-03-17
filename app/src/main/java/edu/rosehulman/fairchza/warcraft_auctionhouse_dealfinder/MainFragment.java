@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -32,11 +33,11 @@ public class MainFragment extends Fragment {
     public MainFragment() {
     }
 
-    public static MainFragment newInstance(ArrayList<WowItem> myItems, ArrayList<AuctionItem> auctions) {
+    public static MainFragment newInstance(ArrayList<WowItem> myItems, ArrayList<AuctionItem> myAuctions) {
         MainFragment fragment = new MainFragment();
         Bundle args = new Bundle();
         args.putParcelableArrayList(ARG_ITEMS, myItems);
-        args.putParcelableArrayList(ARG_AUCTIONS, auctions);
+        args.putParcelableArrayList(ARG_AUCTIONS, myAuctions);
         fragment.setArguments(args);
         return fragment;
     }
@@ -97,11 +98,15 @@ public class MainFragment extends Fragment {
         showDeals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                CompareFragment fragment = CompareFragment.newInstance(myItems, myAuctions, dealRange);
-                ft.replace(R.id.fragment_container, fragment);
-                ft.addToBackStack("mainFragment");
-                ft.commit();
+                if (MainActivity.myAuctions.isEmpty()) {
+                    Toast.makeText(getContext(), R.string.items_loaded_toast, Toast.LENGTH_SHORT).show();
+                } else {
+                    FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                    CompareFragment fragment = CompareFragment.newInstance(myItems, myAuctions, dealRange);
+                    ft.replace(R.id.fragment_container, fragment);
+                    ft.addToBackStack("mainFragment");
+                    ft.commit();
+                }
             }
         });
 

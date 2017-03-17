@@ -29,4 +29,5 @@
     <string name="supp_items_prompt">The following is a list of the supported items:</string>
     <string name="default_buyout_price">Buyout Price</string>
     <string name="default_quantity_number">Default quantity number</string>
+    <string name="items_loaded_toast">No items have been loaded yet</string>
 </resources>
