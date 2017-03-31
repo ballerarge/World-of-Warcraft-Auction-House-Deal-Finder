@@ -94,18 +94,28 @@ public class MyItemsFragment extends Fragment {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 boolean itemAdded = false;
+                                String name = null;
                                 for (DataSnapshot eventSnapshot : dataSnapshot.child("items").getChildren()) {
                                     if (eventSnapshot.child("name_enus").getValue().toString().toLowerCase().equals(itemName)) {
+                                        name = itemName;
                                         WowItem item = (WowItem) eventSnapshot.getValue(WowItem.class);
                                         item.setId(eventSnapshot.getKey());
                                         myItems.add(0, item);
                                         itemAdded = true;
                                         Log.d("DBE", "Added " + itemName);
                                         break;
+                                    } else if (eventSnapshot.getKey().toString().equals(itemName)) {
+                                        WowItem item = (WowItem) eventSnapshot.getValue(WowItem.class);
+                                        item.setId(eventSnapshot.getKey());
+                                        myItems.add(0, item);
+                                        itemAdded = true;
+                                        name = eventSnapshot.child("name_enus").getValue().toString();
+                                        Log.d("DBE", "Added " + name);
+                                        break;
                                     }
                                 }
                                 if (itemAdded) {
-                                    Toast.makeText(getContext(), "Added " + itemName, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "Added " + name, Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(getContext(), "Item not found", Toast.LENGTH_SHORT).show();
                                 }
