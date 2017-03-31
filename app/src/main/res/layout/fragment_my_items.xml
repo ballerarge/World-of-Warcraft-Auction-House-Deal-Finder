@@ -37,13 +37,4 @@
         android:shadowDy="0"
         android:shadowRadius="5"/>
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/wow_question_mark"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/supported_items_button"
-        />
-
 </RelativeLayout>

@@ -63,18 +63,6 @@ public class MyItemsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_items, container, false);
         Button basicItemSearch = (Button) view.findViewById(R.id.basic_item_button);
         Button viewMyItems = (Button) view.findViewById(R.id.view_items_button);
-        ImageButton supportedItems = (ImageButton) view.findViewById(R.id.supported_items_button);
-
-        supportedItems.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                SupportedItemsFragment fragment = new SupportedItemsFragment();
-                ft.replace(R.id.fragment_container, fragment);
-                ft.addToBackStack("myItems");
-                ft.commit();
-            }
-        });
 
         viewMyItems.setOnClickListener(new View.OnClickListener() {
             @Override
