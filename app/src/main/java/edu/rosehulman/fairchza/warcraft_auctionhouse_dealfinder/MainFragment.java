@@ -48,8 +48,6 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         final TextView dealRangeTextView = (TextView) view.findViewById(R.id.deal_range_display);
         Button editItems = (Button) view.findViewById(R.id.edit_items_button);
