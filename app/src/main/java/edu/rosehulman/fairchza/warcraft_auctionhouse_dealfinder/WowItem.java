@@ -12,7 +12,7 @@ public class WowItem implements Parcelable {
 
     private String level;
     private String name_enus;
-    private String priceavg;
+    private String price;
     private String quality;
     private String requiredlevel;
     private String id;
@@ -33,7 +33,7 @@ public class WowItem implements Parcelable {
     protected WowItem(Parcel in) {
         level = in.readString();
         name_enus = in.readString();
-        priceavg = in.readString();
+        price = in.readString();
         quality = in.readString();
         requiredlevel = in.readString();
         id = in.readString();
@@ -64,7 +64,7 @@ public class WowItem implements Parcelable {
     }
 
     public String getPriceavg() {
-        return priceavg;
+        return price;
     }
 
     public void setPriceavg(String price) {
@@ -98,7 +98,7 @@ public class WowItem implements Parcelable {
             gold = gold.substring(1);
         }
 
-        this.priceavg = gold + "g " + silver + "s " + copper + "c";
+        this.price = gold + "g " + silver + "s " + copper + "c";
     }
 
     public String getNum(String price) {
@@ -158,7 +158,7 @@ public class WowItem implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(level);
         dest.writeString(name_enus);
-        dest.writeString(priceavg);
+        dest.writeString(price);
         dest.writeString(quality);
         dest.writeString(requiredlevel);
         dest.writeString(id);
