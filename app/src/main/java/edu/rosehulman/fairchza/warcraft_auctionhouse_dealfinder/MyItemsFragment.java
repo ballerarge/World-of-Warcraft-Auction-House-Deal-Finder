@@ -28,7 +28,6 @@ import java.util.ArrayList;
  */
 
 public class MyItemsFragment extends Fragment {
-
     private static final String ARG_ITEMS = "items";
 
     private ArrayList<WowItem> myItems;
