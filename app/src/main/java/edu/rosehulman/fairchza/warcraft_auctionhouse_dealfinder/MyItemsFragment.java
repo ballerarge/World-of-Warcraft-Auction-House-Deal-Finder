@@ -37,6 +37,66 @@ public class MyItemsFragment extends Fragment {
     public MyItemsFragment() {
     }
 
+    private class okButtonListener implements View.onClickListener{
+        new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(R.string.add_item_prompt);
+                View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_add_item, null, false);
+                builder.setView(view);
+                final EditText itemEditText = (EditText) view.findViewById(R.id.dialog_add_item_text);
+
+                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        final String itemName = itemEditText.getText().toString().toLowerCase();
+                        myItemRef = mItemRef.orderByValue();
+                        myItemRef.keepSynced(true);
+                        myItemRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                boolean itemAdded = false;
+                                String name;
+                                for (DataSnapshot eventSnapshot : dataSnapshot.child("items").getChildren()) {
+                                    WowItem item = (WowItem) eventSnapshot.getValue(WowItem.class);
+                                    item.setId(eventSnapshot.getKey());
+                                    myItems.add(0, item);
+                                    itemAdded = true;
+
+                                    if (eventSnapshot.child("name_enus").getValue().toString().toLowerCase().equals(itemName)) {
+                                        name = itemName;
+                                        break;
+                                    } else if (eventSnapshot.getKey().toString().equals(itemName)) {
+                                        name = eventSnapshot.child("name_enus").getValue().toString();
+                                        break;
+                                    }
+
+                                    Log.d("DBE", "Added " + name);
+                                }
+                                if (itemAdded) {
+                                    Toast.makeText(getContext(), "Added " + name, Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getContext(), "Item not found", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                Log.d("EEE", "The read failed: " + databaseError.getCode());
+                            }
+                        });
+                    }
+                });
+
+                builder.setNegativeButton(android.R.string.cancel, null);
+
+                builder.create().show();
+            }
+        });
+
+        return view;
+    }
     public static MyItemsFragment newInstance(ArrayList<WowItem> myItems) {
         MyItemsFragment fragment = new MyItemsFragment();
         Bundle args = new Bundle();
@@ -74,66 +134,6 @@ public class MyItemsFragment extends Fragment {
             }
         });
 
-        basicItemSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle(R.string.add_item_prompt);
-                View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_add_item, null, false);
-                builder.setView(view);
-                final EditText itemEditText = (EditText) view.findViewById(R.id.dialog_add_item_text);
-
-                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        final String itemName = itemEditText.getText().toString().toLowerCase();
-                        myItemRef = mItemRef.orderByValue();
-                        myItemRef.keepSynced(true);
-                        myItemRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                boolean itemAdded = false;
-                                String name = null;
-                                for (DataSnapshot eventSnapshot : dataSnapshot.child("items").getChildren()) {
-                                    if (eventSnapshot.child("name_enus").getValue().toString().toLowerCase().equals(itemName)) {
-                                        name = itemName;
-                                        WowItem item = (WowItem) eventSnapshot.getValue(WowItem.class);
-                                        item.setId(eventSnapshot.getKey());
-                                        myItems.add(0, item);
-                                        itemAdded = true;
-                                        Log.d("DBE", "Added " + itemName);
-                                        break;
-                                    } else if (eventSnapshot.getKey().toString().equals(itemName)) {
-                                        WowItem item = (WowItem) eventSnapshot.getValue(WowItem.class);
-                                        item.setId(eventSnapshot.getKey());
-                                        myItems.add(0, item);
-                                        itemAdded = true;
-                                        name = eventSnapshot.child("name_enus").getValue().toString();
-                                        Log.d("DBE", "Added " + name);
-                                        break;
-                                    }
-                                }
-                                if (itemAdded) {
-                                    Toast.makeText(getContext(), "Added " + name, Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(getContext(), "Item not found", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                Log.d("EEE", "The read failed: " + databaseError.getCode());
-                            }
-                        });
-                    }
-                });
-
-                builder.setNegativeButton(android.R.string.cancel, null);
-
-                builder.create().show();
-            }
-        });
-
-        return view;
+        basicItemSearch.setOnClickListener(new okButtonListener());
     }
 }
