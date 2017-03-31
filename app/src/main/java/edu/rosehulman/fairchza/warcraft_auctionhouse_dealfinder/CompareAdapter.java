@@ -8,6 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 /**
@@ -18,14 +25,38 @@ public class CompareAdapter extends RecyclerView.Adapter<CompareAdapter.ViewHold
     private ArrayList<WowItem> myItems;
     private Context mContext;
     private int dealRange;
-    private ArrayList<AucDisplayItem> optimizedList;
+    private ArrayList<AucDisplayItem> auctionList;
+    private DatabaseReference mAuctionRef;
+    private Query mQuery;
 
     public CompareAdapter(ArrayList<WowItem> items, Context context, int deal) {
         myItems = items;
         mContext = context;
         dealRange = deal;
-        optimizedList = new ArrayList<>();
-//        optimizeAuctions();
+        auctionList = new ArrayList<>();
+
+        mAuctionRef = FirebaseDatabase.getInstance().getReference("auctions");
+        mAuctionRef.keepSynced(true);
+
+        fillAuctionList();
+    }
+
+    private void fillAuctionList() {
+        mAuctionRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (int i = 0; i < myItems.size(); i++) {
+                    
+                }
+
+                Log.d("AUCTIONITEMS", (dataSnapshot.child("14959").child("124442").getValue()).toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d("EEE", "The read failed: " + databaseError.getCode());
+            }
+        });
     }
 
 
@@ -37,7 +68,7 @@ public class CompareAdapter extends RecyclerView.Adapter<CompareAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(CompareAdapter.ViewHolder holder, final int position) {
-        final AucDisplayItem item = optimizedList.get(position);
+        final AucDisplayItem item = auctionList.get(position);
 
         holder.mTitleTextView.setText(item.getName_enus());
         holder.mLevelTextView.setText(String.format(mContext.getResources().getString(R.string.inserted_level), item.getLevel()));
@@ -51,7 +82,7 @@ public class CompareAdapter extends RecyclerView.Adapter<CompareAdapter.ViewHold
     @Override
     public int getItemCount() {
 
-        return optimizedList.size();
+        return auctionList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
