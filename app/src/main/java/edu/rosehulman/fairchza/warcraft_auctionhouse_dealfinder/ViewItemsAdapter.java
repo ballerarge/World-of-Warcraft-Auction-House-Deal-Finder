@@ -37,10 +37,10 @@ public class ViewItemsAdapter extends RecyclerView.Adapter<ViewItemsAdapter.View
     public void onBindViewHolder(ViewItemsAdapter.ViewHolder holder, final int position) {
         final WowItem item = myItems.get(position);
         holder.mTitleTextView.setText(item.getName_enus());
-        holder.mLevelTextView.setText(String.format(mContext.getResources().getString(R.string.inserted_level), item.getLevel()));
-        holder.mPriceTextView.setText(String.format(mContext.getResources().getString(R.string.inserted_price), item.getPriceavg()));
-        holder.mQualityTextView.setText(String.format(mContext.getResources().getString(R.string.inserted_quality), item.getQuality()));
-        holder.mRequiredLevelTextView.setText(String.format(mContext.getResources().getString(R.string.inserted_reqLevel), item.getRequiredLevel()));
+        holder.mLevelTextView.setText(String.format(mContext.getResources().getString(R.string.inserted_level), "" + item.getLevel()));
+        holder.mPriceTextView.setText(String.format(mContext.getResources().getString(R.string.inserted_price), "" + item.getPrice()));
+        holder.mQualityTextView.setText(String.format(mContext.getResources().getString(R.string.inserted_quality), "" + item.getQualityName()));
+        holder.mRequiredLevelTextView.setText(String.format(mContext.getResources().getString(R.string.inserted_reqLevel), "" + item.getRequiredLevel()));
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -67,6 +67,7 @@ public class ViewItemsAdapter extends RecyclerView.Adapter<ViewItemsAdapter.View
             }
         });
     }
+
 
     @Override
     public int getItemCount() {

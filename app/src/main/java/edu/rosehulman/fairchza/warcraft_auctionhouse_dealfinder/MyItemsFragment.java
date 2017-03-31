@@ -87,20 +87,26 @@ public class MyItemsFragment extends Fragment {
                 builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        final String itemName = itemEditText.getText().toString();
+                        final String itemName = itemEditText.getText().toString().toLowerCase();
                         myItemRef = mItemRef.orderByValue();
                         myItemRef.keepSynced(true);
                         myItemRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                System.out.println("HERE");
-                                int currSize = myItems.size();
-                                for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
-                                    if (eventSnapshot.child("name_enus").getValue().equals(itemName)) {
-                                        myItems.add(0, eventSnapshot.getValue(WowItem.class));
+                                boolean itemAdded = false;
+                                for (DataSnapshot eventSnapshot : dataSnapshot.child("items").getChildren()) {
+                                    if (eventSnapshot.child("name_enus").getValue().toString().toLowerCase().equals(itemName)) {
+                                        WowItem item = (WowItem) eventSnapshot.getValue(WowItem.class);
+                                        item.setId(eventSnapshot.getKey());
+                                        myItems.add(0, item);
+                                        itemAdded = true;
+                                        Log.d("DBE", "Added " + itemName);
+                                        break;
                                     }
                                 }
-                                if (currSize == myItems.size()) {
+                                if (itemAdded) {
+                                    Toast.makeText(getContext(), "Added " + itemName, Toast.LENGTH_SHORT).show();
+                                } else {
                                     Toast.makeText(getContext(), "Item not found", Toast.LENGTH_SHORT).show();
                                 }
                             }
