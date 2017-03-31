@@ -18,64 +18,16 @@ public class CompareAdapter extends RecyclerView.Adapter<CompareAdapter.ViewHold
     private ArrayList<WowItem> myItems;
     private Context mContext;
     private int dealRange;
-    private ArrayList<AuctionItem> myAuctions;
     private ArrayList<AucDisplayItem> optimizedList;
 
-    public CompareAdapter(ArrayList<WowItem> items, Context context, int deal, ArrayList<AuctionItem> auctions) {
+    public CompareAdapter(ArrayList<WowItem> items, Context context, int deal) {
         myItems = items;
         mContext = context;
         dealRange = deal;
-        myAuctions = auctions;
         optimizedList = new ArrayList<>();
-        optimizeAuctions();
+//        optimizeAuctions();
     }
 
-    private void optimizeAuctions() {
-        for (int i = 0; i < myAuctions.size(); i++) {
-            for (int j = 0; j < myItems.size(); j++) {
-                AuctionItem aucItem = myAuctions.get(i);
-                WowItem wowItem = myItems.get(j);
-                if (aucItem.getItem().equals(Integer.parseInt(wowItem.getId()))) {
-                    optimizedList.add(new AucDisplayItem(wowItem.getLevel(), wowItem.getName_enus(), wowItem.getPriceavg(),
-                            wowItem.getPriceNum(), wowItem.getQuality(), wowItem.getRequiredLevel(), Integer.toString(aucItem.getBuyout()),
-                            Integer.toString(aucItem.getQuantity())));
-                }
-            }
-        }
-
-        for (int i = optimizedList.size() - 1; i >= 0; i--) {
-            Log.d("TTT", "Name of auction: " + optimizedList.get(i).getName_enus());
-            Log.d("TTT", "Price of item: " + optimizedList.get(i).getPriceavg());
-            Log.d("TTT", "Price of item: " + optimizedList.get(i).getPriceNum());
-            Log.d("TTT", "Buyout of item: " + optimizedList.get(i).getBuyout());
-            Log.d("TTT", "Quantity of item: " + optimizedList.get(i).getQuantity());
-            Log.d("TTT", "------------------------------------------------------------");
-            float aucData = (Integer.parseInt(optimizedList.get(i).getBuyout()) * 1.0f) / (Integer.parseInt(optimizedList.get(i).getQuantity()) * 1.0f);
-            float itemData = (Integer.parseInt(optimizedList.get(i).getPriceNum()) * 100 * 1.0f) * (dealRange * 1.0f / 100);
-
-            if (aucData > itemData) {
-                optimizedList.remove(optimizedList.get(i));
-            }
-        }
-
-        for (int i = 0; i < optimizedList.size(); i++) {
-            String copper = optimizedList.get(i).getBuyout().substring(optimizedList.get(i).getBuyout().length()-2);
-            copper = copper + "c";
-            if (optimizedList.get(i).getBuyout().length() > 2){
-            String silver = optimizedList.get(i).getBuyout().substring(optimizedList.get(i).getBuyout().length()-4, optimizedList.get(i).getBuyout().length()-2);
-            silver = silver + "s ";
-                if(optimizedList.get(i).getBuyout().length() > 4) {
-                    String gold = optimizedList.get(i).getBuyout().substring(0, optimizedList.get(i).getBuyout().length() - 4);
-                    gold = gold + "g ";
-                    optimizedList.get(i).setBuyout(gold + silver + copper);
-                } else {
-                    optimizedList.get(i).setBuyout(silver + copper);
-                }} else {
-                optimizedList.get(i).setBuyout(copper);
-            }
-        }
-        Log.d("TTT", "Size of optimizedList: " + optimizedList.size());
-    }
 
     @Override
     public CompareAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

@@ -22,7 +22,6 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<WowItem> myItems;
-    public static ArrayList<AuctionItem> myAuctions;
     private final static String PREFS = "PREFS";
     private static final String ITEMS = "items";
 
@@ -31,16 +30,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        myAuctions = new ArrayList<>();
-        Timer time = new Timer();
-        TimerTask updateData = new TimerTask() {
-            @Override
-            public void run() {
-                new JsonAuctionURL().execute();
-            }
-        };
-        time.schedule(updateData, 1000*60*60);
-        new JsonAuctionURL().execute();
 
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
         String json = prefs.getString(ITEMS, "");
@@ -55,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        MainFragment fragment = MainFragment.newInstance(myItems, myAuctions);
+        MainFragment fragment = MainFragment.newInstance(myItems);
         ft.add(R.id.fragment_container, fragment);
         ft.commit();
 
@@ -72,8 +61,5 @@ public class MainActivity extends AppCompatActivity {
         editor.remove(ITEMS).commit();
         editor.putString(ITEMS, json);
         editor.commit();
-    }
-    public void setMyAuctions(ArrayList<AuctionItem> items){
-        this.myAuctions = items;
     }
 }
