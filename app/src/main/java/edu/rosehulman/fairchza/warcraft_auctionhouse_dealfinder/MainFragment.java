@@ -23,21 +23,16 @@ public class MainFragment extends Fragment {
 
     // Figure out how to use this below. Will need it.
     private int dealRange = 100;
-
     private static final String ARG_ITEMS = "items";
-    private static final String ARG_AUCTIONS = "auctions";
-
     private ArrayList<WowItem> myItems;
-    private ArrayList<AuctionItem> myAuctions;
 
     public MainFragment() {
     }
 
-    public static MainFragment newInstance(ArrayList<WowItem> myItems, ArrayList<AuctionItem> myAuctions) {
+    public static MainFragment newInstance(ArrayList<WowItem> myItems) {
         MainFragment fragment = new MainFragment();
         Bundle args = new Bundle();
         args.putParcelableArrayList(ARG_ITEMS, myItems);
-        args.putParcelableArrayList(ARG_AUCTIONS, myAuctions);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,7 +42,6 @@ public class MainFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             myItems = getArguments().getParcelableArrayList(ARG_ITEMS);
-            myAuctions = MainActivity.myAuctions;
         }
     }
 
@@ -98,15 +92,11 @@ public class MainFragment extends Fragment {
         showDeals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (MainActivity.myAuctions.isEmpty()) {
-                    Toast.makeText(getContext(), R.string.items_loaded_toast, Toast.LENGTH_SHORT).show();
-                } else {
-                    FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                    CompareFragment fragment = CompareFragment.newInstance(myItems, myAuctions, dealRange);
-                    ft.replace(R.id.fragment_container, fragment);
-                    ft.addToBackStack("mainFragment");
-                    ft.commit();
-                }
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                CompareFragment fragment = CompareFragment.newInstance(myItems, dealRange);
+                ft.replace(R.id.fragment_container, fragment);
+                ft.addToBackStack("mainFragment");
+                ft.commit();
             }
         });
 
