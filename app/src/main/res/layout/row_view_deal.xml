@@ -72,15 +72,4 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="95dp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textSize="15sp"
-        android:text="@string/default_quantity_number"
-        android:layout_below="@+id/deal_item_buyout_price"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="110dp"
-        android:id="@+id/deal_item_quantity"/>
 </android.support.v7.widget.CardView>

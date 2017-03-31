@@ -9,25 +9,21 @@ public class AucDisplayItem {
     private String level;
     private String name_enus;
     private String priceavg;
-    private String priceNum;
     private String quality;
     private String requiredlevel;
     private String buyout;
-    private String quantity;
 
     public AucDisplayItem() {
 
     }
 
-    public AucDisplayItem(String level, String name_enus, String priceavg, String priceNum, String quality, String requiredlevel, String buyout, String quantity) {
+    public AucDisplayItem(String level, String name_enus, String priceavg, String quality, String requiredlevel, String buyout) {
         this.level = level;
         this.name_enus = name_enus;
         this.priceavg = priceavg;
-        this.priceNum = priceNum;
         this.quality = quality;
         this.requiredlevel = requiredlevel;
         this.buyout = buyout;
-        this.quantity = quantity;
     }
 
     public String getLevel() {
@@ -76,21 +72,5 @@ public class AucDisplayItem {
 
     public void setBuyout(String buyout) {
         this.buyout = buyout;
-    }
-
-    public String getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getPriceNum() {
-        return priceNum;
-    }
-
-    public void setPriceNum(String priceNum) {
-        this.priceNum = priceNum;
     }
 }

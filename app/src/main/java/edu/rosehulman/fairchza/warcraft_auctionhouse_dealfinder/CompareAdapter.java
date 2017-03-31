@@ -27,7 +27,6 @@ public class CompareAdapter extends RecyclerView.Adapter<CompareAdapter.ViewHold
     private int dealRange;
     private ArrayList<AucDisplayItem> auctionList;
     private DatabaseReference mAuctionRef;
-    private Query mQuery;
 
     public CompareAdapter(ArrayList<WowItem> items, Context context, int deal) {
         myItems = items;
@@ -46,7 +45,16 @@ public class CompareAdapter extends RecyclerView.Adapter<CompareAdapter.ViewHold
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (int i = 0; i < myItems.size(); i++) {
-                    
+                    String id = myItems.get(i).id;
+                    int aucPrice = (int) dataSnapshot.child("14959").child(id).getValue();
+                    String name = myItems.get(i).getName_enus();
+                    String itemPrice = Integer.toString(myItems.get(i).getPrice());
+                    String quality = myItems.get(i).getQualityName();
+                    String itemLevel = Integer.toString(myItems.get(i).getLevel());
+                    String reqLevel = Integer.toString(myItems.get(i).getRequiredLevel());
+
+                    auctionList.add(new AucDisplayItem(itemLevel, name, itemPrice,
+                            quality, reqLevel, Integer.toString(aucPrice)));
                 }
 
                 Log.d("AUCTIONITEMS", (dataSnapshot.child("14959").child("124442").getValue()).toString());
@@ -76,7 +84,6 @@ public class CompareAdapter extends RecyclerView.Adapter<CompareAdapter.ViewHold
         holder.mQualityTextView.setText(String.format(mContext.getResources().getString(R.string.inserted_quality), item.getQuality()));
         holder.mRequiredLevelTextView.setText(String.format(mContext.getResources().getString(R.string.inserted_reqLevel), item.getRequiredlevel()));
         holder.mBuyoutPrice.setText(String.format(mContext.getResources().getString(R.string.inserted_buyout), item.getBuyout()));
-        holder.mQuantityTextView.setText(String.format(mContext.getResources().getString(R.string.inserted_quantity), item.getQuantity()));
     }
 
     @Override
@@ -92,7 +99,6 @@ public class CompareAdapter extends RecyclerView.Adapter<CompareAdapter.ViewHold
         TextView mQualityTextView;
         TextView mRequiredLevelTextView;
         TextView mBuyoutPrice;
-        TextView mQuantityTextView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -102,7 +108,6 @@ public class CompareAdapter extends RecyclerView.Adapter<CompareAdapter.ViewHold
             mQualityTextView = (TextView) itemView.findViewById(R.id.deal_item_quality);
             mRequiredLevelTextView = (TextView) itemView.findViewById(R.id.deal_item_reqLevel);
             mBuyoutPrice = (TextView) itemView.findViewById(R.id.deal_item_buyout_price);
-            mQuantityTextView = (TextView) itemView.findViewById(R.id.deal_item_quantity);
         }
     }
 }
