@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ public class CompareFragment extends Fragment {
     private CompareAdapter mAdapter;
 
     public static CompareFragment newInstance(ArrayList<WowItem> myItems, int dealRange) {
+        Log.d("CFE", "Creating compare fragment...");
         CompareFragment fragment = new CompareFragment();
         Bundle args = new Bundle();
         args.putParcelableArrayList(ARG_ITEMS, myItems);
@@ -35,6 +37,7 @@ public class CompareFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d("CFE", "Loading comparison...");
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             myItems = getArguments().getParcelableArrayList(ARG_ITEMS);
@@ -45,6 +48,7 @@ public class CompareFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              final Bundle savedInstanceState) {
+        Log.d("CFE", "Loading comparison view...");
         View view = inflater.inflate(R.layout.fragment_compare, container, false);
         mRecycler = (RecyclerView) view.findViewById(R.id.compare_items_recycler);
         mAdapter = new CompareAdapter(myItems, getContext(), deal);

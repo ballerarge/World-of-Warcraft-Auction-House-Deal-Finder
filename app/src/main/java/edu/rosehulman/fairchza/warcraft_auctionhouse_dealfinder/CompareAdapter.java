@@ -46,7 +46,7 @@ public class CompareAdapter extends RecyclerView.Adapter<CompareAdapter.ViewHold
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (int i = 0; i < myItems.size(); i++) {
                     String id = myItems.get(i).id;
-                    int aucPrice = (int) dataSnapshot.child("14959").child(id).getValue();
+                    long aucPrice = (long) dataSnapshot.child("14959").child(id).getValue();
                     String name = myItems.get(i).getName_enus();
                     String itemPrice = Integer.toString(myItems.get(i).getPrice());
                     String quality = myItems.get(i).getQualityName();
@@ -54,7 +54,7 @@ public class CompareAdapter extends RecyclerView.Adapter<CompareAdapter.ViewHold
                     String reqLevel = Integer.toString(myItems.get(i).getRequiredLevel());
 
                     auctionList.add(new AucDisplayItem(itemLevel, name, itemPrice,
-                            quality, reqLevel, Integer.toString(aucPrice)));
+                            quality, reqLevel, Long.toString(aucPrice)));
                 }
 
                 Log.d("AUCTIONITEMS", (dataSnapshot.child("14959").child("124442").getValue()).toString());
